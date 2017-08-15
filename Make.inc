@@ -3,19 +3,7 @@ ifneq ($(OS),Windows_NT)
   OS = $(shell uname)
 endif
 
-USEGCC = 1
-USECLANG = 0
-
 CFLAGS-add += -Wall -O3
-
-ifeq ($(USECLANG),1)
-USEGCC = 0
-CC = clang
-endif
-
-ifeq ($(USEGCC),1)
-CC = gcc
-endif
 
 ifeq ($(OS), Linux)
 SHLIB_EXT = so
