@@ -3,39 +3,35 @@ ifneq ($(OS),Windows_NT)
   OS = $(shell uname)
 endif
 
-CFLAGS-add += -Wall -O3
+CSTD = -std=gnu99
+CFLAGS = -Wall -O3
 
 ifeq ($(OS), Linux)
 SHLIB_EXT = so
-CFLAGS-add+=-fPIC
-FFLAGS-add+=-fPIC
+fPIC = -fPIC
 endif
 
 ifeq ($(OS), FreeBSD)
 SHLIB_EXT = so
-CFLAGS-add+=-fPIC
-FFLAGS-add+=-fPIC
+fPIC = -fPIC
 endif
 
 ifeq ($(OS), OpenBSD)
 SHLIB_EXT = so
-CFLAGS-add+=-fPIC
-FFLAGS-add+=-fPIC
+fPIC = -fPIC
+endif
+
+ifeq ($(OS), SunOS)
+SHLIB_EXT = so
+fPIC = -fPIC
 endif
 
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
-CFLAGS-add+=-fPIC
-FFLAGS-add+=-fPIC
+fPIC = -fPIC
 endif
 
 ifeq ($(OS), Windows_NT)
 SHLIB_EXT = dll
 endif
 
-# SunOS with gcc
-ifeq ($(OS), SunOS)
-SHLIB_EXT = so
-CFLAGS-add+=-fPIC
-FFLAGS-add+=-fPIC
-endif
