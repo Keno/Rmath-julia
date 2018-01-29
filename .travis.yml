@@ -28,3 +28,15 @@ jobs:
         - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
       script:
         - julia build_tarballs.jl
+      deploy:
+        provider: releases
+        api_key:
+            # Note; this api_key is only valid for Keno/Rmath-julia; you need
+            # to make your own: https://docs.travis-ci.com/user/deployment/releases/
+            secure: HgZMI82Uup5x5cfmhK26mp6KbpHkRvGjnrGKghoGVfuY5ewwfM9UZ6ln0XxltjDP5cvCh4r3EpJNbYe9SjzF2ECnIn3xdJarNfXZME/CzXe4Lf0CA2WzXaUZT+NJKlH873y2n5rP5nPsUE0KP+5YoE3ZM5t80yc5uWlKaMdZl4R8YKkA2Lwzsy6YdvAVTB9vKEY9ETn6AySXc60dnZnd4LU+RjSJiTqjl3mhlFWoIfcC6rVFUKMwewsTk869+DArGjE5Y+fVZj848fqpmhaOYSx5cdwfOEeOLPFHgMJ8IQbbHXePPCezYH4BMVPvQBZ2ZC2B7zT7ySKz0OQIbD2L7LHrBf9KRBLCV3sSh8OC2LQGfE5yqvtLkxcD37qrfrep8Qus7rXw4pdmjFzVuRLq3jdLqtsLik3BID6s9Fteg5AsbvtcQHkIRhgttyDOcg7DD/Txm/Bz1Wn6HBJFEn/DZa+jQVH5ZqOTEhzO2rKrGoLbel61ivAfsMchn/wVjHzve03z5lh7M/To/hBGkrC1XpjI/MRCObypJ9zJWXtfZ2z21MihS1yuuf5Sgc1UGg4Xg9hfpVSvThPKpwS96478PMrd3AmmYZQUzBSVhYU3usdpPBKSb6aSxxbvTQNiDsJPVI4J8EzuY0xOgoTOfz1pE9hDlOQiF6O5mSmOylRaXDo=
+        file_glob: true
+        file: products/*
+        skip_cleanup: true
+        on:
+            repo: Keno/Rmath-julia
+            tags: true
