@@ -4,7 +4,6 @@ julia:
   - 0.6
 os:
   - linux
-  - osx
 cache:
   timeout: 1000
   directories:
