@@ -5,8 +5,26 @@ julia:
 os:
   - linux
   - osx
+cache:
+  timeout: 1000
+  directories:
+    - downloads
+env:
+  global:
+    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+    - BINARYBUILDER_AUTOMATIC_APPLE=true
 notifications:
   email: false
 script:
   - make -j3
   - julia test.jl
+jobs:
+  include:
+    - stage: deploy
+      julia: 0.6
+      sudo: required
+      before_script:
+        - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryProvider.jl")'
+        - julia -e 'Pkg.clone("https://github.com/JuliaPackaging/BinaryBuilder.jl"); Pkg.build()'
+      script:
+        - julia build_tarballs.jl
