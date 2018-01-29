@@ -13,6 +13,7 @@ env:
   global:
     - BINARYBUILDER_DOWNLOADS_CACHE=downloads
     - BINARYBUILDER_AUTOMATIC_APPLE=true
+
 notifications:
   email: false
 script:
